@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Phone, ArrowUp } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const menuData = [
   {
@@ -116,7 +116,8 @@ const categories = menuData.map((s) => ({ name: s.category, id: s.id }));
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState(categories[0].id);
   const [showBackToTop, setShowBackToTop] = useState(false);
-
+const categoryNavRef = useRef<HTMLDivElement | null>(null);
+const categoryButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const handleScroll = useCallback(() => {
     setShowBackToTop(window.scrollY > 600);
     for (const cat of categories) {
@@ -144,6 +145,24 @@ const Menu = () => {
     }
   };
 
+useEffect(() => {
+  const container = categoryNavRef.current;
+  const activeButton = categoryButtonRefs.current[activeCategory];
+
+  if (!container || !activeButton) return;
+
+  const containerWidth = container.offsetWidth;
+  const buttonLeft = activeButton.offsetLeft;
+  const buttonWidth = activeButton.offsetWidth;
+
+  const targetScrollLeft = buttonLeft - containerWidth / 2 + buttonWidth / 2;
+
+  container.scrollTo({
+    left: Math.max(0, targetScrollLeft),
+    behavior: "smooth",
+  });
+}, [activeCategory]);
+
   return (
     <main className="min-h-screen pt-20">
       {/* Menu Header */}
@@ -160,14 +179,16 @@ const Menu = () => {
           </motion.div>
         </div>
       </section>
-
+      
       {/* Sticky Category Nav */}
       <div className="sticky top-[65px] z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-3xl mx-auto px-5">
-          <div className="flex gap-1 overflow-x-auto py-3 no-scrollbar">
+          <div ref={categoryNavRef} className="flex gap-1 overflow-x-auto py-3 no-scrollbar">
+            <div className="flex w-max gap-3 px-4">
             {categories.map((cat) => (
               <button
                 key={cat.id}
+                ref={(el) => (categoryButtonRefs.current[cat.id] = el)} 
                 onClick={() => scrollToCategory(cat.id)}
                 className={`whitespace-nowrap px-4 py-1.5 rounded-sm font-body text-xs tracking-wide transition-all ${
                   activeCategory === cat.id
@@ -178,6 +199,7 @@ const Menu = () => {
                 {cat.name}
               </button>
             ))}
+            </div>
           </div>
         </div>
       </div>
@@ -223,31 +245,57 @@ const Menu = () => {
           </motion.section>
         ))}
       </div>
-
+      
       {/* Bottom CTA */}
-      <div className="border-t border-border py-10 bg-card">
-        <div className="max-w-3xl mx-auto px-5 text-center">
-          <p className="font-heading text-xl md:text-2xl text-foreground mb-6">Ready to order?</p>
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <a
-              href="tel:+60123456789"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 font-body text-sm font-medium tracking-wide hover:opacity-90 transition-opacity rounded-sm"
-            >
-              <Phone className="w-4 h-4" /> Call to Order
-            </a>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3.5 font-body text-sm tracking-wide hover:border-primary hover:text-primary transition-colors rounded-sm"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back to Home
-            </Link>
-          </div>
-          <p className="font-body text-[10px] text-muted-foreground">
-            © {new Date().getFullYear()} Chacko Restaurant · Bukit Gasing, Petaling Jaya
-          </p>
-        </div>
-      </div>
+<div className="border-t border-border py-10 bg-card">
+  <div className="max-w-6xl mx-auto px-5">
+    <p className="font-heading text-xl md:text-2xl text-foreground mb-6 text-center">
+      Ready to order?
+    </p>
 
+    <div className="flex flex-wrap justify-center gap-3 mb-8">
+      <a
+        href="tel:+60123456789"
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 font-body text-sm font-medium tracking-wide hover:opacity-90 transition-opacity rounded-sm"
+      >
+        <Phone className="w-4 h-4" /> Call to Order
+      </a>
+
+      <Link
+        to="/"
+        className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3.5 font-body text-sm tracking-wide hover:border-primary hover:text-primary transition-colors rounded-sm"
+      >
+        <ArrowLeft className="w-4 h-4" /> Back to Home
+      </Link>
+    </div>
+  </div>
+</div>
+{/* ===== FOOTER ===== */}
+<footer className="py-8 border-t border-border">
+  <div className="max-w-6xl mx-auto px-5">
+    <div className="flex flex-col gap-3 text-center md:grid md:grid-cols-3 md:items-center md:gap-6">
+      <p className="font-body text-[11px] md:text-xs text-muted-foreground md:text-left">
+        © {new Date().getFullYear()} Chacko Restaurant Bukit Gasing, Petaling Jaya
+      </p>
+
+      <div className="font-body text-[11px] md:text-xs text-muted-foreground md:text-center">
+        Designed by{" "}
+        <a
+          href="https://sinuxconsulting.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-secondary hover:opacity-80 hover:underline transition-colors"
+        >
+          Sinux Consulting
+        </a>
+      </div>
+      
+      <p className="font-body text-[11px] md:text-xs text-muted-foreground md:text-right">
+        Authentic Kerala flavours, served with warmth.
+      </p>
+    </div>
+  </div>
+</footer>
       {/* Back to top FAB */}
       {showBackToTop && (
         <button

@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Index from "./pages/Index.tsx";
 import Menu from "./pages/Menu.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />

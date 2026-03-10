@@ -442,13 +442,31 @@ const Index = () => {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-8 border-t border-border">
-        <div className="max-w-3xl mx-auto px-5 text-center">
-          <p className="font-body text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Chacko Restaurant · Bukit Gasing, Petaling Jaya
-          </p>
-        </div>
-      </footer>
+<footer className="py-8 border-t border-border">
+  <div className="max-w-6xl mx-auto px-5">
+    <div className="flex flex-col gap-3 text-center md:grid md:grid-cols-3 md:items-center md:gap-6">
+      <p className="font-body text-[11px] md:text-xs text-muted-foreground md:text-left">
+        © {new Date().getFullYear()} Chacko Restaurant Bukit Gasing, Petaling Jaya
+      </p>
+
+      <div className="font-body text-[11px] md:text-xs text-muted-foreground md:text-center">
+        Designed by{" "}
+        <a
+          href="https://sinuxconsulting.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-secondary hover:opacity-80 hover:underline transition-colors"
+        >
+          Sinux Consulting
+        </a>
+      </div>
+
+      <p className="font-body text-[11px] md:text-xs text-muted-foreground md:text-right">
+        Authentic Kerala flavours, served with warmth.
+      </p>
+    </div>
+  </div>
+</footer>
     </main>
   );
 };
