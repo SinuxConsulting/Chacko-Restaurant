@@ -187,7 +187,7 @@ useEffect(() => {
       </section>
       
       {/* Sticky Category Nav */}
-      <div className="sticky top-[65px] z-40 bg-background/95 backdrop-blur-md border-b border-border">
+      <div className="sticky top-[60px] z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="max-w-3xl mx-auto px-5">
           <div ref={categoryNavRef} className="flex gap-1 overflow-x-auto py-3 no-scrollbar">
             <div className="flex w-max gap-3 px-4">
@@ -209,7 +209,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
+      
       {/* Menu Sections */}
       <div className="max-w-3xl mx-auto px-5 py-8 md:py-12">
         {menuData.map((section, sectionIdx) => (
