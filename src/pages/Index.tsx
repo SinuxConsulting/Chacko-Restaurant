@@ -13,6 +13,7 @@ import galleryInterior from "@/assets/gallery-interior.jpg";
 import gallerySpices from "@/assets/gallery-spices.jpg";
 import atmosphere1 from "@/assets/atmosphere-1.jpg";
 import atmosphere2 from "@/assets/atmosphere-2.jpg";
+import Seo from "@/components/Seo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -53,6 +54,11 @@ const reviews = [
 const Index = () => {
   return (
     <main className="overflow-x-hidden">
+      <Seo
+  title="Authentic Kerala Cuisine in Petaling Jaya"
+  description="Chacko Restaurant serves authentic Kerala cuisine in Bukit Gasing, Petaling Jaya, including banana leaf meals, biryani, dosa, parotta, seafood, and South Indian breakfast."
+  path="/"
+/>
       {/* ===== HERO ===== */}
       <section className="relative min-h-[100svh] flex items-end pb-16 md:pb-24">
         <div className="absolute inset-0">
@@ -152,20 +158,36 @@ const Index = () => {
               <p className="font-body text-sm text-muted-foreground max-w-md">Tender fish simmered in fragrant coconut milk with curry leaves and green chili. A Kerala classic.</p>
             </div>
           </motion.div>
-
+          
           {/* Two column feature */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
             {[
-              { img: dishBiryani, name: "Lamb Biryani", desc: "Fragrant basmati, slow-cooked lamb, whole spices", tag: "Best Seller" },
-              { img: dishDosa, name: "Masala Dosa", desc: "Crispy fermented crepe with potato masala filling", tag: "Breakfast" },
-            ].map((dish, i) => (
+  {
+    img: dishBiryani,
+    name: "Lamb Biryani",
+    desc: "Fragrant basmati, slow-cooked lamb, whole spices",
+    tag: "Best Seller",
+    alt: "Lamb biryani served with fragrant basmati rice and Kerala-style spices",
+  },
+  {
+    img: dishDosa,
+    name: "Masala Dosa",
+    desc: "Crispy fermented crepe with potato masala filling",
+    tag: "Breakfast",
+    alt: "Masala dosa served crisp with potato filling, chutney, and sambar",
+  },
+].map((dish, i) => (
               <motion.div
                 key={dish.name}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.1 }}
                 className="relative group overflow-hidden rounded-sm"
               >
-                <img src={dish.img} alt={dish.name} className="w-full h-64 md:h-80 object-cover group-hover:scale-[1.03] transition-transform duration-700" />
+                <img
+  src={dish.img}
+  alt={dish.alt}
+  className="w-full h-64 md:h-80 object-cover group-hover:scale-[1.03] transition-transform duration-700"
+/>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <span className="font-body text-[10px] tracking-[0.2em] uppercase text-primary block mb-1">{dish.tag}</span>
@@ -179,9 +201,24 @@ const Index = () => {
           {/* Three column row */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
             {[
-              { img: dishParotta, name: "Kerala Parotta", desc: "Flaky layered bread, mutton curry" },
-              { img: dishPrawn, name: "Prawn Masala", desc: "Tiger prawns, rich tomato gravy" },
-              { img: dishTawaFish, name: "Tawa Fish Fry", desc: "Pan-seared whole fish, masala crust" },
+  {
+    img: dishParotta,
+    name: "Kerala Parotta",
+    desc: "Flaky layered bread, mutton curry",
+    alt: "Kerala parotta served with curry in traditional South Indian style",
+  },
+  {
+    img: dishPrawn,
+    name: "Prawn Masala",
+    desc: "Tiger prawns, rich tomato gravy",
+    alt: "Prawn masala cooked in a rich spiced Kerala-style gravy",
+  },
+  {
+    img: dishTawaFish,
+    name: "Tawa Fish Fry",
+    desc: "Pan-seared whole fish, masala crust",
+    alt: "Tawa fish fry with a spiced masala crust served hot from the pan",
+  },
             ].map((dish, i) => (
               <motion.div
                 key={dish.name}
@@ -189,7 +226,11 @@ const Index = () => {
                 viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08 }}
                 className="relative group overflow-hidden rounded-sm"
               >
-                <img src={dish.img} alt={dish.name} className="w-full h-56 object-cover group-hover:scale-[1.03] transition-transform duration-700" />
+                <img
+  src={dish.img}
+  alt={dish.alt}
+  className="w-full h-56 object-cover group-hover:scale-[1.03] transition-transform duration-700"
+/>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <p className="font-heading text-lg text-foreground">{dish.name}</p>

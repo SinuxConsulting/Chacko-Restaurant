@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Phone, ArrowUp } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
+import Seo from "@/components/Seo";
 
 const menuData = [
   {
@@ -165,6 +166,11 @@ useEffect(() => {
 
   return (
     <main className="min-h-screen pt-20">
+      <Seo
+  title="Menu"
+  description="Explore the Chacko Restaurant menu in Petaling Jaya, featuring Kerala meals, biryani, breakfast classics, parotta, seafood, curries, and authentic South Indian favourites."
+  path="/menu"
+/>
       {/* Menu Header */}
       <section className="py-10 md:py-16 border-b border-border">
         <div className="max-w-3xl mx-auto px-5 text-center">
