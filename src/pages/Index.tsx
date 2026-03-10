@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Phone, MapPin, Clock, ArrowRight, Star } from "lucide-react";
+import Reviews from "@/components/Reviews";
 import heroImage from "@/assets/hero-food.jpg";
 import dishDosa from "@/assets/dish-dosa.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
@@ -306,64 +307,7 @@ const Index = () => {
       </section>
 
       {/* ===== REVIEWS ===== */}
-      <section className="py-16 md:py-28 bg-card">
-        <div className="max-w-6xl mx-auto px-5">
-          <div className="text-center mb-10 md:mb-14">
-            <motion.p
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              className="font-body text-xs tracking-[0.25em] uppercase text-primary mb-2"
-            >
-              What People Say
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-4"
-            >
-              Loved by locals.
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              className="flex items-center justify-center gap-2"
-            >
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
-                ))}
-              </div>
-              <span className="font-heading text-xl font-semibold text-foreground ml-1">4.5</span>
-              <span className="font-body text-sm text-muted-foreground">on Google</span>
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            {reviews.map((review, i) => (
-              <motion.div
-                key={review.name}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="bg-background border border-border rounded-sm p-6"
-              >
-                <div className="flex gap-0.5 mb-3">
-                  {[...Array(review.rating)].map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 fill-secondary text-secondary" />
-                  ))}
-                  {review.rating < 5 && [...Array(5 - review.rating)].map((_, j) => (
-                    <Star key={j + review.rating} className="w-3.5 h-3.5 text-muted" />
-                  ))}
-                </div>
-                <p className="font-body text-sm text-foreground leading-relaxed mb-4">
-                  "{review.text}"
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="font-body text-sm font-medium text-foreground">{review.name}</span>
-                  <span className="font-body text-xs text-muted-foreground">{review.time}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Reviews />
 
       {/* ===== GALLERY ===== */}
       <section className="py-16 md:py-28">
